@@ -77,7 +77,7 @@ function appendIndividualDetails(item) {
   button.id = "btn";
   button.textContent = "Buy Ticket";
   let total = item.capacity - item.tickets_sold;
-  //adds button fo buying tickets.
+  //adds button for buying tickets.
   button.addEventListener("click", () => {
     //if tickets available is greater than 0 the total amount decreses by one every time it is pressed otherwise it prints a message
     if (total > 0) {
