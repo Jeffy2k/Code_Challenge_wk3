@@ -20,13 +20,16 @@ function appendFirstMovie(data) {
   let button = document.createElement("button");
   button.id = "btn";
   button.textContent = "Buy Ticket";
-  let total = first.capacity - first.tickets_sold;
   button.addEventListener("click", () => {
-    if (total > 0) {
-      total -= 1;
+     first.tickets_sold += 1;
+    handleBuying(first)
+    let total = first.capacity - first.tickets_sold;
+    if (first.tickets_sold < first.capacity) {
       document.getElementById("tickets").innerHTML = total;
-    } else if (total < 1) {
+    }
+    else if (first.tickets_sold = first.capacity) {
       document.getElementById("tickets").innerHTML = "*No tickets available";
+      handleBuying(first)
     }
   });
   title.textContent = first.title;
@@ -80,11 +83,15 @@ function appendIndividualDetails(item) {
   //adds button for buying tickets.
   button.addEventListener("click", () => {
     //if tickets available is greater than 0 the total amount decreses by one every time it is pressed otherwise it prints a message
-    if (total > 0) {
-      total -= 1;
+    item.tickets_sold += 1;
+    handleBuying(item)
+    let total = item.capacity - item.tickets_sold;
+    if (item.tickets_sold < item.capacity) {
       document.getElementById("tickets").innerHTML = total;
-    } else if (total < 1) {
+    }
+    else if (item.tickets_sold = item.capacity) {
       document.getElementById("tickets").innerHTML = "*No tickets available";
+      handleBuying(item)
     }
   });
 
@@ -97,4 +104,14 @@ function appendIndividualDetails(item) {
     ${item.poster}
     `;
   butonn.appendChild(button);
+}
+
+function handleBuying(ticketsobj){
+  fetch(`http://localhost:3000/films/${ticketsobj.id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(ticketsobj),
+  })
+   .then((resp) => resp.json())
+   .then((obj) => console.log(obj))
 }
