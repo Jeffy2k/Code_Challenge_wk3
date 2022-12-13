@@ -1,11 +1,11 @@
 //fetches data from the mock server.T
 function fetchData() {
-  fetch("http://localhost:3000/films")
+  fetch("jeffy2k.github.io/server/db.json")
     .then((response) => response.json())
     .then((data) => appendFirstMovie(data));
 }
 fetchData();
- 
+
 //append first movie when the page loads
 function appendFirstMovie(data) {
   let first = data[0];
@@ -22,14 +22,14 @@ function appendFirstMovie(data) {
   button.textContent = "Buy Ticket";
   button.addEventListener("click", () => {
      first.tickets_sold += 1;
-    handleBuying(first)
+    // handleBuying(first)
     let total = first.capacity - first.tickets_sold;
     if (first.tickets_sold < first.capacity) {
       document.getElementById("tickets").innerHTML = total;
     }
     else if (first.tickets_sold = first.capacity) {
       document.getElementById("tickets").innerHTML = "*No tickets available";
-      handleBuying(first)
+      // handleBuying(first)
     }
   });
   title.textContent = first.title;
@@ -45,7 +45,7 @@ function appendFirstMovie(data) {
 
 //fetches list of movies in the menu section
 function appendMenu() {
-  fetch("http://localhost:3000/films")
+  fetch("jeffy2k.github.io/server/db.json")
     .then((response) => response.json())
     .then((data) => menuTitles(data));
 }
@@ -84,14 +84,14 @@ function appendIndividualDetails(item) {
   button.addEventListener("click", () => {
     //if tickets available is greater than 0 the total amount decreses by one every time it is pressed otherwise it prints a message
     item.tickets_sold += 1;
-    handleBuying(item)
+    // handleBuying(item)
     let total = item.capacity - item.tickets_sold;
     if (item.tickets_sold < item.capacity) {
       document.getElementById("tickets").innerHTML = total;
     }
     else if (item.tickets_sold = item.capacity) {
       document.getElementById("tickets").innerHTML = "*No tickets available";
-      handleBuying(item)
+      // handleBuying(item)
     }
   });
 
@@ -106,12 +106,12 @@ function appendIndividualDetails(item) {
   butonn.appendChild(button);
 }
 
-function handleBuying(ticketsobj){
-  fetch(`http://localhost:3000/films/${ticketsobj.id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(ticketsobj),
-  })
-   .then((resp) => resp.json())
-   .then((obj) => console.log(obj))
-}
+// function handleBuying(ticketsobj){
+//   fetch(`http://localhost:3000/films/${ticketsobj.id}`, {
+//     method: "PATCH",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(ticketsobj),
+//   })
+//    .then((resp) => resp.json())
+//    .then((obj) => console.log(obj))
+// }
