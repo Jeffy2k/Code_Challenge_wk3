@@ -1,6 +1,6 @@
 //fetches data from the mock server.T
 function fetchData() {
-  fetch("jeffy2k.github.io/server/db.json")
+  fetch("https://jeffy2k.github.io/server/db.json")
     .then((response) => response.json())
     .then((data) => appendFirstMovie(data));
 }
@@ -8,7 +8,7 @@ fetchData();
 
 //append first movie when the page loads
 function appendFirstMovie(data) {
-  let first = data[0];
+  let first = data.films[0];
   let butonn = document.getElementById("button");
   butonn.innerHTML = "";
   let image = document.getElementById("pic");
@@ -45,7 +45,7 @@ function appendFirstMovie(data) {
 
 //fetches list of movies in the menu section
 function appendMenu() {
-  fetch("jeffy2k.github.io/server/db.json")
+  fetch("https://jeffy2k.github.io/server/db.json")
     .then((response) => response.json())
     .then((data) => menuTitles(data));
 }
@@ -53,12 +53,12 @@ appendMenu();
 
 //Displays menu titles on the menu section
 function menuTitles(data) {
-  data.forEach((item) => {
+  data.films.forEach((item) => {
     let title = document.createElement("li");
     title.id = "list";
     title.addEventListener("click", () => {
       const i = item.id;
-      appendIndividualDetails(data[i - 1]);
+      appendIndividualDetails(data.films[i - 1]);
     });
     let menu = document.getElementById("menu");
     title.textContent = item.title;
