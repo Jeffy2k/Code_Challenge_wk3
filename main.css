@@ -2,6 +2,7 @@ body {
   background-color: #222;
   height: 1000px;
 }
+
 #btn{
   padding: 0.7em;
     background-color: black;
@@ -66,7 +67,11 @@ transition: 0.1s;
     float: left;
     margin-left: 1em;
   }
-
+#menu.scroll{
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align:justify;
+}
   #list{
     cursor: pointer;
     margin: 1em;
